@@ -1,6 +1,8 @@
 import express from "express";
 import connectDatabase from "./config/dbConnect.js";
 import routes from "./routes/index.js";
+import trataErros from "./middlewares/trataErros.js";
+import manipulador404 from "./middlewares/manipulador404.js";
 
 const conexao = await connectDatabase();
 
@@ -14,5 +16,9 @@ conexao.once("open", () => {
 
 const app = express();
 routes(app);
+
+app.use(manipulador404);
+
+app.use(trataErros)
 
 export default app;
