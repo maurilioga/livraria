@@ -1,5 +1,5 @@
 import DadosNaoEncontrados from "../errors/DadosNaoEncontrados.js";
-import autor from "../models/Autor.js";
+import { autor } from "../models/index.js";
 
 class AutorController {
 
@@ -31,7 +31,7 @@ class AutorController {
         try {
             const novoAutor = await autor.create(req.body);
             res.status(201).json({
-                message: "Autor criado com sucesso!", 
+                message: "Autor criado com sucesso!",
                 autor: novoAutor
             });
         } catch (error) {
@@ -43,7 +43,7 @@ class AutorController {
         try {
             const id = req.params.id;
             await autor.findByIdAndUpdate(id, req.body);
-            res.status(200).json({message: "Autor atualizado com sucesso!"});
+            res.status(200).json({ message: "Autor atualizado com sucesso!" });
         } catch (error) {
             next(error);
         }
@@ -53,7 +53,7 @@ class AutorController {
         try {
             const id = req.param.id;
             await autor.findByIdAndDelete(id);
-            res.status(200).json({message: "Autor excluido com sucesso!"});
+            res.status(200).json({ message: "Autor excluido com sucesso!" });
         } catch (error) {
             next(error);
         }
